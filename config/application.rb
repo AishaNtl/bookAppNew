@@ -28,5 +28,14 @@ module BookApp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Configure generators
+    config.generators do |g|
+      g.test_framework :test_unit, fixture: false
+      # Add other generator configurations if needed
+      g.helper false         # Don't create helper files
+      g.assets false         # Don't create asset files
+      g.view_specs false     # Don't create view specs
+    end
   end
 end
