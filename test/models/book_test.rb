@@ -5,7 +5,7 @@
 #   #   assert true
 #   # end
 # end
-require 'test_helper'
+require "test_helper"
 
 class BookTest < ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods

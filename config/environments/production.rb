@@ -27,10 +27,10 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Static file serving
-config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
-config.public_file_server.headers = { 
-  'Cache-Control' => "public, max-age=#{1.year.to_i}" 
+# Static file serving
+config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+config.public_file_server.headers = {
+  "Cache-Control" => "public, max-age=#{1.year.to_i}"
 }
 
 # Active Storage configuration
