@@ -20,6 +20,8 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'factory_bot_rails'
+require 'capybara/rspec'
+require 'selenium-webdriver'
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -46,6 +48,16 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   include FactoryBot::Syntax::Methods
+
+  
+    # Capybara system test configuration
+  config.before(:each, type: :system) do
+    driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+    # Alternative for headless testing:
+    # driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+  end
+
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')

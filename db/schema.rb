@@ -12,11 +12,12 @@
 
 ActiveRecord::Schema[8.0].define(version: 2025_06_28_193013) do
   create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.string "author"
-    t.integer "publishing_year"
-    t.text "description"
+    t.string "title", limit: 100, null: false
+    t.string "author", limit: 50, null: false
+    t.integer "publishing_year", null: false
+    t.string "description", limit: 1000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_books_on_title", unique: true
   end
 end

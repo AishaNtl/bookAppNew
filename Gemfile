@@ -54,4 +54,9 @@ gem 'simplecov', require: false, group: :test
   gem 'capybara'
 end
 
+group :test do
+  gem 'selenium-webdriver'
+  gem 'webdrivers' # Automatically manages browser drivers
+end
+
 end
