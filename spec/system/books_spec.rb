@@ -28,8 +28,8 @@
 require 'rails_helper'
 
 RSpec.describe "Books API", type: :system do
-let!(:book) { create(:book, title: "Test Driven Development", 
-                            author: "Jane Doe", 
+let!(:book) { create(:book, title: "Test Driven Development",
+                            author: "Jane Doe",
                             publishing_year: 2010) }
 
 it "shows book details" do

@@ -13,7 +13,7 @@ class AddConstraintsToBooks < ActiveRecord::Migration[6.1]
 def up
     # Set default publishing_year for existing NULL records
     Book.where(publishing_year: nil).update_all(publishing_year: 2000) # or any default year
-    
+
     # Now apply constraints
     change_column :books, :title, :string, limit: 100, null: false
     change_column :books, :author, :string, limit: 50, null: false

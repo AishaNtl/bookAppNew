@@ -46,17 +46,17 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-gem 'simplecov', require: false, group: :test
+gem "simplecov", require: false, group: :test
 
   group :test do
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'capybara'
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "capybara"
 end
 
 group :test do
-  gem 'selenium-webdriver'
-  gem 'webdrivers' # Automatically manages browser drivers
+  gem "selenium-webdriver"
+  gem "webdrivers" # Automatically manages browser drivers
+end
 end
 
-end

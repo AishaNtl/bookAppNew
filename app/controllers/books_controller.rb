@@ -120,7 +120,7 @@
 #   # GET /books/search
 #   def search
 #     if params[:query].present?
-#       @books = Book.where("title LIKE ? OR author LIKE ?", 
+#       @books = Book.where("title LIKE ? OR author LIKE ?",
 #                       "%#{params[:query]}%", "%#{params[:query]}%")
 #     else
 #       @books = Book.all
@@ -181,7 +181,7 @@ class BooksController < ApplicationController
 
   def search
     if params[:query].present?
-      @books = Book.where("title LIKE ? OR author LIKE ?", 
+      @books = Book.where("title LIKE ? OR author LIKE ?",
                       "%#{params[:query]}%", "%#{params[:query]}%")
     else
       @books = Book.all

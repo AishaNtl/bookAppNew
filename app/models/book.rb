@@ -49,16 +49,16 @@
 
 class Book < ApplicationRecord
 # Validations
-validates :title, presence: true, 
+validates :title, presence: true,
                     length: { maximum: 100 },
                     uniqueness: { case_sensitive: false }
 
-validates :author, presence: true, 
+validates :author, presence: true,
                     length: { maximum: 50 },
                     format: { with: /\A[a-zA-Z\s\-']+\z/, message: "only allows letters, spaces, hyphens, and apostrophes" }
 
 validates :publishing_year, presence: true,
-                            numericality: { 
+                            numericality: {
                                 only_integer: true,
                                 greater_than_or_equal_to: 1800,
                                 less_than_or_equal_to: Date.current.year
