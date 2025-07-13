@@ -1,7 +1,6 @@
 class BookObserver
 def self.after_create(book)
     puts "Observer: New book created - #{book.title} by #{book.author}"
-
 end
 
 def self.after_update(book)

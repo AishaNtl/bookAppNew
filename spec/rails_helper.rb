@@ -50,9 +50,9 @@ RSpec.configure do |config|
   include FactoryBot::Syntax::Methods
 
 
-    # Capybara system test configuration
+  # Capybara system test configuration
   config.before(:each, type: :system) do
-    driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+    driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ]
     # Alternative for headless testing:
     # driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end

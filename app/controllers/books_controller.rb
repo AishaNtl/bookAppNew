@@ -198,7 +198,7 @@ class BooksController < ApplicationController
 
     if @book.save
       render json: @book.as_json.merge(
-        message: 'Book was successfully created.'
+        message: "Book was successfully created."
       ), status: :created, location: @book
     else
       render json: {
@@ -211,7 +211,7 @@ class BooksController < ApplicationController
   def update
     if @book.update(book_params)
       render json: @book.as_json.merge(
-        message: 'Book was successfully updated.'
+        message: "Book was successfully updated."
       )
     else
       render json: {
@@ -223,7 +223,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy!
-    render json: { message: 'Book was successfully destroyed.' }
+    render json: { message: "Book was successfully destroyed." }
   end
 
   private

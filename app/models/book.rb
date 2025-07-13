@@ -93,7 +93,7 @@ def notify_update
 end
 
 def title_cannot_contain_invalid_words
-    invalid_words = ['free', 'download', 'pdf'] # Example list
+    invalid_words = [ "free", "download", "pdf" ] # Example list
     if title.present? && invalid_words.any? { |word| title.downcase.include?(word) }
     errors.add(:title, "contains invalid words")
     end
