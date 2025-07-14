@@ -7,17 +7,12 @@ SimpleCov.start
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
-# ... rest of your file ...# This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 # Uncomment the line below in case you have `--require rails_helper` in the `.rspec` file
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
 require 'rspec/rails'
-# Add additional requires below this line. Rails is not loaded until this point!
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'factory_bot_rails'
 require 'capybara/rspec'
@@ -46,17 +41,22 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
   include FactoryBot::Syntax::Methods
 
-
   # Capybara system test configuration
   config.before(:each, type: :system) do
-    driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ]
-    # Alternative for headless testing:
-    # driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+    # Use :rack_test driver by default (no browser)
+    driven_by :rack_test
+    
+    # Or for JavaScript tests, configure Chrome like this:
+    if ENV['SELENIUM_DRIVER'] == 'chrome'
+      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400], options: {
+        args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
+      }
+    end
   end
-
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [

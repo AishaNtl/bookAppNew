@@ -140,6 +140,7 @@ jobs:
         env:
           RAILS_ENV: test
           REDIS_URL: redis://localhost:6379/0
+          SELENIUM_DRIVER: 'chrome'
         run: |
           bundle exec rspec
           bundle exec rails test
