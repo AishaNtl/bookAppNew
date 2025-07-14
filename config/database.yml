@@ -23,12 +23,11 @@ production:
   # Remove the URL line unless using PostgreSQL
   # url: <%= ENV['DATABASE_URL'] %>  # Only for PostgreSQL
   cable:
-  <<: *default
-  database: storage/production.sqlite3
+    <<: *default
+    database: storage/production.sqlite3
 
   # Additional databases (if truly needed)
   cache:
     <<: *default
     database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
-    

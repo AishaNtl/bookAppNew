@@ -3,6 +3,7 @@ set -o errexit
 
 # Create SQLite storage
 mkdir -p storage
+chmod -R 777 storage
 touch storage/production.sqlite3
 
 # Install gems
