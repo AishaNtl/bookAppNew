@@ -1,5 +1,4 @@
 # bookApp/spec/rails_helper.rb
-# run 'rails generate rspec:install'
 require 'simplecov'
 SimpleCov.start
 
@@ -25,14 +24,16 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     # Use :rack_test driver by default (no browser)
     driven_by :rack_test
-
+    
     # For JavaScript tests, configure Chrome
     if ENV['SELENIUM_DRIVER'] == 'chrome'
-      driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ], options: {
-        'goog:chromeOptions' => {
-          'args' => %w[no-sandbox disable-dev-shm-usage disable-gpu]
-        }
-      }
+      chrome_options = Selenium::WebDriver::Chrome::Options.new
+      chrome_options.add_argument('--no-sandbox')
+      chrome_options.add_argument('--disable-dev-shm-usage')
+      chrome_options.add_argument('--disable-gpu')
+      chrome_options.add_argument('--headless')
+
+      driven_by :selenium, using: :chrome, screen_size: [1400, 1400], options: chrome_options
     end
   end
 
