@@ -52,10 +52,8 @@ gem "simplecov", require: false, group: :test
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "capybara"
-end
-
-group :test do
   gem "selenium-webdriver"
   gem "webdrivers" # Automatically manages browser drivers
 end
 end
+
