@@ -56,4 +56,3 @@ gem "simplecov", require: false, group: :test
   gem "webdrivers" # Automatically manages browser drivers
 end
 end
-
