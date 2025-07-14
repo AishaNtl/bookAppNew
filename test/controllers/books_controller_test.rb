@@ -55,14 +55,32 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     assert_equal @book.title, books.first["title"]
   end
 
+  # test "should create book" do
+  #   assert_difference("Book.count") do
+  #     post books_url,
+  #         params: {
+  #           book: attributes_for(:book, title: "Book Title 4")
+  #         },
+  #         as: :json
+  #   end
+  
   test "should create book" do
-    assert_difference("Book.count") do
-      post books_url,
-          params: {
-            book: attributes_for(:book, title: "Book Title 4")
-          },
-          as: :json
-    end
+  initial_count = Book.count  # Get count after setup creates first book
+  
+  assert_difference("Book.count", 1) do  # Explicitly expect +1
+    post books_url,
+        params: {
+          book: attributes_for(:book, title: "Book Title 4")
+        },
+        as: :json
+  end
+
+  assert_response :created
+  assert_equal initial_count + 1, Book.count  # Verify final count
+
+  created_book = JSON.parse(response.body)
+  assert_equal "Book Title 4", created_book["title"]
+end
 
     assert_response :created
 
