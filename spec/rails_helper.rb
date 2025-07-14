@@ -1,4 +1,4 @@
-# bookApp/spec/rails_helper.rb
+# spec/rails_helper.rb
 require 'simplecov'
 SimpleCov.start
 
@@ -24,17 +24,17 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     # Use :rack_test driver by default (no browser)
     driven_by :rack_test
-    
-    # For JavaScript tests, configure Chrome
-    if ENV['SELENIUM_DRIVER'] == 'chrome'
-      chrome_options = Selenium::WebDriver::Chrome::Options.new
-      chrome_options.add_argument('--no-sandbox')
-      chrome_options.add_argument('--disable-dev-shm-usage')
-      chrome_options.add_argument('--disable-gpu')
-      chrome_options.add_argument('--headless')
+  end
 
-      driven_by :selenium, using: :chrome, screen_size: [1400, 1400], options: chrome_options
-    end
+  config.before(:each, type: :system, js: true) do
+    # For JavaScript tests, configure headless Chrome
+    chrome_options = Selenium::WebDriver::Chrome::Options.new
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--headless')
+
+    driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ], options: { options: chrome_options }
   end
 
   config.fixture_paths = [
