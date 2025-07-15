@@ -42,7 +42,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
   include FactoryBot::Syntax::Methods
 
   setup do
-    @book = create(:book, 
+    @book = create(:book,
                   title: "Ruby Fundamentals",
                   author: "Jane Doe",
                   publishing_year: 2023,
