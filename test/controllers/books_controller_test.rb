@@ -42,61 +42,69 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
   include FactoryBot::Syntax::Methods
 
   setup do
-    @book = create(:book)  # Creates and saves a book using FactoryBot
+    @book = create(:book, 
+                  title: "Ruby Fundamentals",
+                  author: "Jane Doe",
+                  publishing_year: 2023,
+                  description: "A comprehensive guide to Ruby")
   end
 
   test "should get index" do
     get books_url, as: :json
     assert_response :success
 
-    # Parse JSON response and verify contents
     books = JSON.parse(response.body)
     assert_not_empty books
     assert_equal @book.title, books.first["title"]
+    assert_equal @book.publishing_year, books.first["publishing_year"]
   end
 
   test "should create book" do
-    initial_count = Book.count
-
     assert_difference("Book.count", 1) do
       post books_url,
           params: {
-            book: attributes_for(:book, title: "Book Title 4")
+            book: {
+              title: "New Book Title",
+              author: "John Smith",
+              publishing_year: 2024,
+              description: "Brand new book description"
+            }
           },
           as: :json
     end
 
     assert_response :created
-    assert_equal initial_count + 1, Book.count
-
     created_book = JSON.parse(response.body)
-    assert_equal "Book Title 4", created_book["title"]
+    assert_equal "New Book Title", created_book["title"]
+    assert_equal 2024, created_book["publishing_year"]
   end
 
   test "should show book" do
     get book_url(@book), as: :json
     assert_response :success
 
-    # Verify the returned book matches
     book_json = JSON.parse(response.body)
     assert_equal @book.id, book_json["id"]
-    assert_equal @book.title, book_json["title"]
+    assert_equal "Ruby Fundamentals", book_json["title"]
+    assert_equal 2023, book_json["publishing_year"]
   end
 
   test "should update book" do
-    new_attributes = attributes_for(:book)  # New set of attributes
-
     patch book_url(@book),
           params: {
-            book: new_attributes
+            book: {
+              title: "Updated Ruby Fundamentals",
+              publishing_year: 2025,
+              description: "Revised edition"
+            }
           },
           as: :json
 
     assert_response :success
-
-    # Reload and verify updates
     @book.reload
-    assert_equal new_attributes[:title], @book.title
+    assert_equal "Updated Ruby Fundamentals", @book.title
+    assert_equal 2025, @book.publishing_year
+    assert_equal "Revised edition", @book.description
   end
 
   test "should destroy book" do
