@@ -19,15 +19,11 @@ test:
 
 production:
   <<: *default
-  database: storage/production.sqlite3  # Explicit path for primary DB
-  # Remove the URL line unless using PostgreSQL
-  # url: <%= ENV['DATABASE_URL'] %>  # Only for PostgreSQL
+  database: storage/production.sqlite3
+  # For Action Cable (WebSockets) - Use same SQLite DB
   cable:
-    <<: *default
-    database: storage/production.sqlite3
-
-  # Additional databases (if truly needed)
-  cache:
-    <<: *default
-    database: storage/production_cache.sqlite3
-    migrations_paths: db/cache_migrate
+    adapter: sqlite3
+    database: storage/production.sqlite3  # Reuse same file (or use separate if needed)
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    timeout: 5000
+    
