@@ -63,10 +63,10 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
   #         },
   #         as: :json
   #   end
-  
+
   test "should create book" do
   initial_count = Book.count  # Get count after setup creates first book
-  
+
   assert_difference("Book.count", 1) do  # Explicitly expect +1
     post books_url,
         params: {
@@ -87,7 +87,7 @@ end
     # Verify the created book
     created_book = JSON.parse(response.body)
     assert_equal "Book Title 4", created_book["title"]
-  end
+end
 
   test "should show book" do
     get book_url(@book), as: :json
@@ -124,4 +124,3 @@ end
   response_body = JSON.parse(response.body)
   assert_equal "Book was successfully destroyed.", response_body["message"]
   end
-end
