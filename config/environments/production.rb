@@ -27,14 +27,14 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-# Static file serving
-config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
-config.public_file_server.headers = {
-  "Cache-Control" => "public, max-age=#{1.year.to_i}"
-}
+  # Static file serving
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  config.public_file_server.headers = {
+    "Cache-Control" => "public, max-age=#{1.year.to_i}"
+  }
 
-# Active Storage configuration
-config.active_storage.service = :local
+  # Active Storage configuration
+  config.active_storage.service = :local
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
@@ -56,8 +56,10 @@ config.active_storage.service = :local
   config.cache_store = :solid_cache_store
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
+  # Using Solid Queue with primary database
   config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
+  config.solid_queue.connects_to = { database: { writing: :primary } }
+  
   # Disable these if not using
   config.solid_queue.silence_polling = true
   config.solid_cache.silence_polling = true
