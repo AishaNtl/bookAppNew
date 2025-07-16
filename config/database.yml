@@ -31,6 +31,30 @@
 #   <<: *default
 #   database: storage/production_queue.sqlite3
 # PostgreSQL configuration
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+
+# development:
+#   <<: *default
+#   database: bookapp_development
+#   host: 127.0.0.1
+#   username: bookapp
+#   password: your_password
+
+# test:
+#   <<: *default
+#   database: bookapp_test
+#   host: 127.0.0.1
+#   username: bookapp
+#   password: your_password
+
+# production:
+#   <<: *default
+#   url: <%= ENV['DATABASE_URL'] %>
+#   # Remove host/username/password - use only DATABASE_URL
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -39,20 +63,11 @@ default: &default
 
 development:
   <<: *default
+  host: 127.0.0.1
+  username: bookapp
+  password: your_password
   database: bookapp_development
-  host: 127.0.0.1
-  username: bookapp
-  password: your_password
-
-test:
-  <<: *default
-  database: bookapp_test
-  host: 127.0.0.1
-  username: bookapp
-  password: your_password
 
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  # Remove host/username/password - use only DATABASE_URL
-  
