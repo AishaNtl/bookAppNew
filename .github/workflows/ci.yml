@@ -82,8 +82,10 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+      - name: Install Brakeman
+        run: gem install brakeman
       - name: Security scan
-        run: brakeman --no-pager --exit-on-warn
+        run: bundle exec brakeman --no-pager --exit-on-warn --exit-on-error
 
   lint:
     runs-on: ubuntu-latest
