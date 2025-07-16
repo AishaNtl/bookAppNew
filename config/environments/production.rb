@@ -59,7 +59,6 @@ Rails.application.configure do
   # Using Solid Queue with primary database
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = { database: { writing: :primary } }
-  
   # Disable these if not using
   config.solid_queue.silence_polling = true
   config.solid_cache.silence_polling = true
