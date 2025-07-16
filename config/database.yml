@@ -4,29 +4,55 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+
+# development:
+#   <<: *default
+#   database: storage/development.sqlite3
+
+# test:
+#   <<: *default
+#   database: storage/test.sqlite3
+
+# production:
+#   <<: *default
+#   database: storage/production.sqlite3
+#   # For Action Cable (WebSockets) - Use same SQLite DB
+#   cable:
+#     adapter: sqlite3
+#     database: storage/production.sqlite3  # Reuse same file (or use separate if needed)
+#     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#     timeout: 5000
+
+# queue:  # Add this section
+#   <<: *default
+#   database: storage/production_queue.sqlite3
+# PostgreSQL configuration
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: bookapp_development
+  host: 127.0.0.1
+  username: bookapp
+  password: your_password
 
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: bookapp_test
+  host: 127.0.0.1
+  username: bookapp
+  password: your_password
 
 production:
   <<: *default
-  database: storage/production.sqlite3
-  # For Action Cable (WebSockets) - Use same SQLite DB
-  cable:
-    adapter: sqlite3
-    database: storage/production.sqlite3  # Reuse same file (or use separate if needed)
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    timeout: 5000
-
-queue:  # Add this section
-  <<: *default
-  database: storage/production_queue.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
+  # Remove host/username/password - use only DATABASE_URL
+  

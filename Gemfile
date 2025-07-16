@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 2.7.2"
+# gem "sqlite3", "~> 2.7.2"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -35,6 +35,7 @@ gem "thruster", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
 gem "ransack"
+gem 'sprockets-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -54,5 +55,12 @@ gem "simplecov", require: false, group: :test
   gem "capybara", "~> 3.40"
   gem "selenium-webdriver", "~> 4.10"
   gem "webdrivers", "~> 5.2" # Automatically manages browser drivers
+end
+
+group :production do
+  gem "pg" # PostgreSQL adapter
+end
+group :development, :test do
+  gem "sqlite3", "~> 2.7.2" # Keep SQLite locally for development
 end
 end
