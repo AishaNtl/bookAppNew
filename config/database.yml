@@ -18,20 +18,15 @@ test:
   database: storage/test.sqlite3
 
 production:
-  # Primary database configuration (PostgreSQL in production)
-  primary:
-    adapter: postgresql
-    encoding: unicode
-    url: <%= ENV['DATABASE_URL'] %>
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  
-  # Action Cable configuration (using primary database)
+  <<: *default
+  database: storage/production.sqlite3
+  # For Action Cable (WebSockets) - Use same SQLite DB
   cable:
-    adapter: postgresql
-    url: <%= ENV['DATABASE_URL'] %>
+    adapter: sqlite3
+    database: storage/production.sqlite3  # Reuse same file (or use separate if needed)
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    timeout: 5000
 
-  # SQLite fallback configuration (commented out - only for reference)
-  # <<: *default
-  # database: storage/production.sqlite3
-  
+  queue:  # Add this section
+    <<: *default
+    database: storage/production_queue.sqlite3
