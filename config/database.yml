@@ -27,6 +27,6 @@ production:
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     timeout: 5000
 
-  queue:  # Add this section
-    <<: *default
-    database: storage/production_queue.sqlite3
+queue:  # Add this section
+  <<: *default
+  database: storage/production_queue.sqlite3
