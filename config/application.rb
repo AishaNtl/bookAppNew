@@ -55,10 +55,10 @@ module BookApp
     # Add this CORS configuration (place it before the generators config)
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*' # For development
-        resource '*',
+        origins "*" # For development
+        resource "*",
           headers: :any,
-          methods: [:get, :post, :put, :patch, :delete, :options, :head],
+          methods: [ :get, :post, :put, :patch, :delete, :options, :head ],
           credentials: false # Set to true if using cookies/auth
       end
     end
